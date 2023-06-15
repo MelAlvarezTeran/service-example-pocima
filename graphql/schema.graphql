@@ -1,0 +1,19 @@
+type stockBySeller {
+  seller: String
+  skuId: String
+  balance: [stockBalance]
+}
+
+type stockBalance {
+  warehouseId: String
+  warehouseName: String
+  totalQuantity: Int
+  reservedQuantity: Int
+  hasUnlimitedQuantity: Boolean
+  timeToRefill: Int
+  dateOfSupplyUtc: String
+}
+
+type Query {
+  getStockBySeller(sku: String!): [stockBySeller]
+}

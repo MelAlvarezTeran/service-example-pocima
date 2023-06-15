@@ -1,11 +1,19 @@
-import type { ClientsConfig, ServiceContext, RecorderState } from '@vtex/api'
+import type {
+  ClientsConfig,
+  ServiceContext,
+  RecorderState,
+  IOResponse,
+  ParamsContext,
+} from '@vtex/api'
 import { LRUCache, method, Service } from '@vtex/api'
 
 import { Clients } from './clients'
-import { status } from './middlewares/status'
-import { validate } from './middlewares/validate'
+import { stocksellers } from './middlewares/stocksellers'
+import { mapsellers } from './middlewares/mapsellers'
+import type { Seller } from './typings/logistics'
+import { getStockBySeller } from './resolvers/stockbyseller'
 
-const TIMEOUT_MS = 800
+const TIMEOUT_MS = 2000
 
 // Create a LRU memory cache for the Status client.
 // The 'max' parameter sets the size of the cache.
@@ -40,17 +48,24 @@ declare global {
 
   // The shape of our State object found in `ctx.state`. This is used as state bag to communicate between middlewares.
   interface State extends RecorderState {
-    code: number
+    sellers: IOResponse<Seller>
   }
 }
 
 // Export a service that defines route handlers and client options.
-export default new Service({
+export default new Service<Clients, State, ParamsContext>({
   clients,
   routes: {
     // `status` is the route ID from service.json. It maps to an array of middlewares (or a single handler).
-    status: method({
-      GET: [validate, status],
+    selleravailability: method({
+      GET: [mapsellers, stocksellers],
     }),
+  },
+  graphql: {
+    resolvers: {
+      Query: {
+        getStockBySeller,
+      },
+    },
   },
 })
