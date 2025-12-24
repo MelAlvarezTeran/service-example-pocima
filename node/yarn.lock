@@ -6366,9 +6366,9 @@ static-extend@^0.1.1:
     define-property "^0.2.5"
     object-copy "^0.1.0"
 
-"stats-lite@github:vtex/node-stats-lite#dist":
-  version "2.2.0"
-  resolved "https://codeload.github.com/vtex/node-stats-lite/tar.gz/1b0d39cc41ef7aaecfd541191f877887a2044797"
+stats-lite@vtex/node-stats-lite#dist:
+  version "2.2.1"
+  resolved "https://codeload.github.com/vtex/node-stats-lite/tar.gz/a0b5ee91861f31b6ec845146b4906faf5172c430"
   dependencies:
     isnumber "~1.0.0"
 
@@ -6978,6 +6978,10 @@ word-wrap@~1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
   integrity sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==
+
+"worldwidegolfqa.sportsboxaipoc-service@https://sportsboxaipoc2--worldwidegolfqa.myvtex.com/_v/private/typings/linked/v1/worldwidegolfqa.sportsboxaipoc-service@0.0.0+build1766593325/public/@types/worldwidegolfqa.sportsboxaipoc-service":
+  version "0.0.0"
+  resolved "https://sportsboxaipoc2--worldwidegolfqa.myvtex.com/_v/private/typings/linked/v1/worldwidegolfqa.sportsboxaipoc-service@0.0.0+build1766593325/public/@types/worldwidegolfqa.sportsboxaipoc-service#6b939aded5643b331db62c93fe36de275e41f72f"
 
 wrap-ansi@^5.1.0:
   version "5.1.0"
