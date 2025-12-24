@@ -1,17 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
   ClientsConfig,
   ServiceContext,
   RecorderState,
-  IOResponse,
   ParamsContext,
 } from '@vtex/api'
-import { LRUCache, method, Service } from '@vtex/api'
+import { LRUCache, Service } from '@vtex/api'
 
 import { Clients } from './clients'
-import { stocksellers } from './middlewares/stocksellers'
-import { mapsellers } from './middlewares/mapsellers'
-import type { Seller } from './typings/logistics'
-import { getStockBySeller } from './resolvers/stockbyseller'
+import { getSkus } from './resolvers/getSku'
+import { addToCart } from './resolvers/addToCart'
 
 const TIMEOUT_MS = 2000
 
@@ -47,24 +45,17 @@ declare global {
   type Context = ServiceContext<Clients, State>
 
   // The shape of our State object found in `ctx.state`. This is used as state bag to communicate between middlewares.
-  interface State extends RecorderState {
-    sellers: IOResponse<Seller>
-  }
+  type State = RecorderState
 }
 
 // Export a service that defines route handlers and client options.
 export default new Service<Clients, State, ParamsContext>({
   clients,
-  routes: {
-    // `status` is the route ID from service.json. It maps to an array of middlewares (or a single handler).
-    selleravailability: method({
-      GET: [mapsellers, stocksellers],
-    }),
-  },
   graphql: {
     resolvers: {
       Query: {
-        getStockBySeller,
+        getSkus,
+        addToCart,
       },
     },
   },

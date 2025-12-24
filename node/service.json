@@ -5,10 +5,5 @@
   "minReplicas": 2,
   "maxReplicas": 4,
   "workers": 1,
-  "routes": {
-    "selleravailability": {
-      "path": "/v0/selleravailability/:sku",
-      "public": true
-    }
-  }
+  "routes": {}
 }

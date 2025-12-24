@@ -1,19 +1,90 @@
-type stockBySeller {
-  seller: String
-  skuId: String
-  balance: [stockBalance]
+type GetSkuContextResponse {
+  Id: Int
+  ProductId: Int
+  ListPrice: Float
+  SellingPrice: Float
+  NameComplete: String
+  ComplementName: String
+  ProductName: String
+  ProductDescription: String
+  ProductRefId: String
+  TaxCode: String
+  SkuName: String
+  IsActive: Boolean
+  IsTransported: Boolean
+  IsInventoried: Boolean
+  IsGiftCardRecharge: Boolean
+  ImageUrl: String
+  DetailUrl: String
+  CSCIdentification: String
+  BrandId: String
+  BrandName: String
+  IsBrandActive: Boolean
+  ManufacturerCode: String
+  IsKit: Boolean
+  KitItems: [String]
+  Services: [String]
+  Categories: [String]
+  Attachments: [SkuAttachment]
+  Collections: [String]
+  SalesChannels: [Int]
+  Images: [SkuImage]
+  SkuSpecifications: [SkuSpecification]
+  ProductSpecifications: [SkuProductSpecification]
+  ProductClustersIds: String
+  ProductCategoryIds: String
+  IsDirectCategoryActive: Boolean
+  ProductGlobalCategoryId: Int
+  CommercialConditionId: Int
+  RewardValue: Int
+  AlternateIdValues: [String]
+  EstimatedDateArrival: String
+  MeasurementUnit: String
+  UnitMultiplier: Int
+  InformationSource: String
+  ModalType: String
 }
 
-type stockBalance {
-  warehouseId: String
-  warehouseName: String
-  totalQuantity: Int
-  reservedQuantity: Int
-  hasUnlimitedQuantity: Boolean
-  timeToRefill: Int
-  dateOfSupplyUtc: String
+type SkuAttachmentFields {
+  FieldName: String
+  MaxCaracters: String
+  DomainValues: String
+}
+
+type SkuAttachment {
+  Id: Int
+  Name: String
+  Keys: [String]
+  Fields: SkuAttachmentFields
+  IsActive: Boolean
+  IsRequired: Boolean
+}
+
+type SkuImage {
+  ImageUrl: String
+  ImageName: String
+  FileId: Int
+}
+
+type SkuSpecification {
+  FieldId: Int
+  FieldName: String
+  FieldValueIds: [Int]
+  FieldValues: [String]
+}
+
+type SkuProductSpecification {
+  FieldId: Int
+  FieldName: String
+  FieldValueIds: [Int]
+  FieldValues: [String]
+}
+
+type OrderForm {
+  orderFormId: String
 }
 
 type Query {
-  getStockBySeller(sku: String!): [stockBySeller]
+  getSkus(skus: [String!]): [GetSkuContextResponse] @auth(scope: PUBLIC)
+  addToCart(sku: String!): OrderForm @auth(scope: PUBLIC)
 }
